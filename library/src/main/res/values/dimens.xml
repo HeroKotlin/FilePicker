@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="file_picker_file_padding_horizontal">14dp</dimen>
+    <dimen name="file_picker_file_padding_vertical">10dp</dimen>
+
+    <dimen name="file_picker_file_icon_width">40dp</dimen>
+    <dimen name="file_picker_file_icon_height">40dp</dimen>
+
+    <dimen name="file_picker_file_name_margin_left">10dp</dimen>
+    <dimen name="file_picker_file_name_margin_top">4dp</dimen>
+    <dimen name="file_picker_file_name_text_size">14dp</dimen>
+
+    <dimen name="file_picker_file_size_margin_top">5dp</dimen>
+    <dimen name="file_picker_file_size_text_size">12dp</dimen>
+
+    <dimen name="file_picker_file_time_margin_left">10dp</dimen>
+    <dimen name="file_picker_file_time_margin_top">5dp</dimen>
+    <dimen name="file_picker_file_time_text_size">12dp</dimen>
+
+    <dimen name="file_picker_file_separator_width">1px</dimen>
+    <dimen name="file_picker_file_separator_margin_left">10dp</dimen>
+    <dimen name="file_picker_file_separator_margin_right">10dp</dimen>
+
+</resources>

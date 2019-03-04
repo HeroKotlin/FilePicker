@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="photo_picker_file_list_bg_color">#F9F9F9</color>
+
+    <color name="file_picker_file_name_text_color">#000</color>
+    <color name="file_picker_file_size_text_color">#999</color>
+    <color name="file_picker_file_time_text_color">#999</color>
+    <color name="file_picker_file_separator_bg_color">#999</color>
+</resources>

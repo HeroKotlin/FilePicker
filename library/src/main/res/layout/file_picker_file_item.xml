@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/file_picker_file_padding_horizontal"
+                android:paddingRight="@dimen/file_picker_file_padding_horizontal"
+                android:paddingTop="@dimen/file_picker_file_padding_vertical"
+                android:paddingBottom="@dimen/file_picker_file_padding_vertical">
+
+    <ImageView
+            android:id="@+id/iconView"
+            android:layout_width="@dimen/file_picker_file_icon_width"
+            android:layout_height="@dimen/file_picker_file_icon_height"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/file_picker_word"/>
+
+    <ImageView
+            android:id="@+id/selectButton"
+            android:layout_width="@dimen/file_picker_file_icon_width"
+            android:layout_height="@dimen/file_picker_file_icon_height"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            tools:src="@drawable/file_picker_excel"/>
+
+    <View
+            android:id="@+id/separatorView"
+            android:layout_width="@dimen/file_picker_file_separator_width"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@id/selectButton"
+            android:layout_marginRight="@dimen/file_picker_file_separator_margin_right"
+            android:background="@drawable/file_picker_file_separator"/>
+
+    <TextView
+            android:id="@+id/nameView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/iconView"
+            android:layout_toLeftOf="@id/separatorView"
+            android:layout_marginLeft="@dimen/file_picker_file_name_margin_left"
+            android:layout_marginTop="@dimen/file_picker_file_name_margin_top"
+            android:layout_marginRight="@dimen/file_picker_file_separator_margin_left"
+            android:gravity="left"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="@dimen/file_picker_file_name_text_size"
+            android:textColor="@color/file_picker_file_name_text_color"
+            tools:text="很长很长很长很长很长很长很长很长很长很长很长的文件.pdf"/>
+
+    <TextView
+            android:id="@+id/sizeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nameView"
+            android:layout_alignLeft="@id/nameView"
+            android:layout_marginTop="@dimen/file_picker_file_size_margin_top"
+            android:textSize="@dimen/file_picker_file_size_text_size"
+            android:textColor="@color/file_picker_file_size_text_color"
+            tools:text="500M"/>
+
+    <TextView
+            android:id="@+id/timeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nameView"
+            android:layout_toRightOf="@id/sizeView"
+            android:layout_toLeftOf="@id/separatorView"
+            android:layout_marginTop="@dimen/file_picker_file_time_margin_top"
+            android:layout_marginLeft="@dimen/file_picker_file_time_margin_left"
+            android:layout_marginRight="@dimen/file_picker_file_separator_margin_left"
+            android:gravity="left"
+            android:textSize="@dimen/file_picker_file_time_text_size"
+            android:textColor="@color/file_picker_file_time_text_color"
+            tools:text="2020-12-22 22:22:22"/>
+
+
+
+</RelativeLayout>
