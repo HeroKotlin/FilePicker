@@ -9,7 +9,10 @@ data class File(
     var size: Int,
     val type: FileType,
     var time: Long,
-    var selected: Boolean = false
+
+    var index: Int = 0,
+    var selected: Boolean = false,
+    var selectable: Boolean = false
 ) {
     companion object {
 

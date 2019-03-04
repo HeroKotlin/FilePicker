@@ -8,6 +8,11 @@ import java.util.*
 abstract class FilePickerConfiguration {
 
     /**
+     * 最多选择多少个文件
+     */
+    var maxSelectCount = 9
+
+    /**
      * 扫描磁盘时，设置包含的文件类型（include 和 exclude 只能二选一）
      */
     var includeFileMediaTypes = listOf<Int>()

@@ -8,7 +8,7 @@ import com.github.herokotlin.filepicker.model.File
 import com.github.herokotlin.filepicker.R
 import kotlinx.android.synthetic.main.file_picker_file_item.view.*
 
-class FileItem(view: View, private val configuration: FilePickerConfiguration, private val onClick: ((File) -> Unit), private val onToggle: ((Int) -> Unit)): RecyclerView.ViewHolder(view) {
+class FileItem(view: View, private val configuration: FilePickerConfiguration, private val onClick: ((File) -> Unit), private val onToggle: ((File) -> Unit)): RecyclerView.ViewHolder(view) {
 
     private val iconView = view.iconView
 
@@ -20,8 +20,6 @@ class FileItem(view: View, private val configuration: FilePickerConfiguration, p
 
     private val selectButton = view.selectButton
 
-    private var index = -1
-
     private lateinit var file: File
 
     init {
@@ -29,16 +27,17 @@ class FileItem(view: View, private val configuration: FilePickerConfiguration, p
             onClick.invoke(file)
         }
         selectButton.setOnClickListener {
-            file.selected = !file.selected
-            onToggle.invoke(index)
+            onToggle.invoke(file)
         }
     }
 
-    fun bind(index: Int, file: File) {
+    fun bind(file: File) {
 
         nameView.text = file.name
         sizeView.text = configuration.formatSize(file.size)
         timeView.text = configuration.formatTime(file.time * 1000)
+
+        selectButton.checkable = file.selectable
         selectButton.checked = file.selected
 
         iconView.setImageResource(
@@ -61,7 +60,6 @@ class FileItem(view: View, private val configuration: FilePickerConfiguration, p
             }
         )
 
-        this.index = index
         this.file = file
 
     }

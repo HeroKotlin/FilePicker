@@ -16,6 +16,8 @@ class FileList : FrameLayout {
 
     var onFileClick: ((File) -> Unit)? = null
 
+    var onSelectedFileListChange: (() -> Unit)? = null
+
     var fileList = listOf<File>()
 
         set(value) {
@@ -29,6 +31,8 @@ class FileList : FrameLayout {
             adapter.notifyDataSetChanged()
 
         }
+
+    var selectedFileList = mutableListOf<File>()
 
     private lateinit var configuration: FilePickerConfiguration
 
@@ -64,6 +68,51 @@ class FileList : FrameLayout {
 
     }
 
+    private fun toggleChecked(file: File) {
+
+        val selected = !file.selected
+        val selectedCount = selectedFileList.count()
+
+        if (selected) {
+
+            // 因为有动画，用户可能在动画过程中快速点击了新的照片
+            // 这里应该忽略
+            if (selectedCount == configuration.maxSelectCount) {
+                return
+            }
+
+            file.selected = true
+            selectedFileList.add(file)
+            onSelectedFileListChange?.invoke()
+
+            // 到达最大值，就无法再选了
+            if (selectedCount + 1 == configuration.maxSelectCount) {
+                adapter.notifyDataSetChanged()
+            }
+            else {
+                adapter.notifyItemChanged(file.index)
+            }
+
+        }
+        else {
+
+            selectedFileList.remove(file)
+            onSelectedFileListChange?.invoke()
+
+            file.selected = false
+
+            // 上个状态是到达上限
+            if (selectedCount == configuration.maxSelectCount) {
+                adapter.notifyDataSetChanged()
+            }
+            else {
+                adapter.notifyItemChanged(file.index)
+            }
+
+        }
+
+    }
+
     inner class FileListAdapter: RecyclerView.Adapter<FileItem>() {
 
         override fun getItemCount(): Int {
@@ -71,16 +120,33 @@ class FileList : FrameLayout {
         }
 
         override fun onBindViewHolder(holder: FileItem, position: Int) {
-            holder.bind(position, fileList[position])
+
+            val file = fileList[position]
+
+            file.index = position
+
+            file.selectable = if (file.selected) {
+                true
+            }
+            else {
+                selectedFileList.count() < configuration.maxSelectCount
+            }
+
+            holder.bind(file)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FileItem {
             val view = LayoutInflater.from(parent.context).inflate(R.layout.file_picker_file_item, parent, false)
-            return FileItem(view, configuration, {
-                onFileClick?.invoke(it)
-            }) {
-                adapter.notifyItemChanged(it)
-            }
+            return FileItem(
+                view,
+                configuration,
+                {
+                    onFileClick?.invoke(it)
+                },
+                {
+                    toggleChecked(it)
+                }
+            )
         }
 
     }
