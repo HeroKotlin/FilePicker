@@ -39,6 +39,7 @@ class FileItem(view: View, private val configuration: FilePickerConfiguration, p
         nameView.text = file.name
         sizeView.text = configuration.formatSize(file.size)
         timeView.text = configuration.formatTime(file.time * 1000)
+        selectButton.checked = file.selected
 
         iconView.setImageResource(
             when (file.type) {
@@ -57,15 +58,6 @@ class FileItem(view: View, private val configuration: FilePickerConfiguration, p
                 else -> {
                     R.drawable.file_picker_txt
                 }
-            }
-        )
-
-        selectButton.setImageResource(
-            if (file.selected) {
-                R.drawable.file_picker_select_button_checked
-            }
-            else {
-                R.drawable.file_picker_select_button_unchecked
             }
         )
 

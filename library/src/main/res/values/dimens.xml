@@ -17,7 +17,8 @@
     <dimen name="file_picker_file_time_margin_top">5dp</dimen>
     <dimen name="file_picker_file_time_text_size">12dp</dimen>
 
-    <dimen name="file_picker_file_select_button_width">44dp</dimen>
+    <!-- 每行的 padding right 设置为 0，因此 select button 的宽度需要大一些 -->
+    <dimen name="file_picker_file_select_button_width">54dp</dimen>
     <dimen name="file_picker_file_select_button_height">44dp</dimen>
     <dimen name="file_picker_file_select_button_margin_left">20dp</dimen>
 

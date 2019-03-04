@@ -4,7 +4,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/file_picker_file_padding_horizontal"
-                android:paddingRight="@dimen/file_picker_file_padding_horizontal"
+                android:paddingRight="0dp"
                 android:paddingTop="@dimen/file_picker_file_padding_vertical"
                 android:paddingBottom="@dimen/file_picker_file_padding_vertical">
 
@@ -17,14 +17,12 @@
             android:scaleType="centerCrop"
             tools:src="@drawable/file_picker_word"/>
 
-    <ImageButton
+    <com.github.herokotlin.filepicker.view.SelectButton
             android:id="@+id/selectButton"
             android:layout_width="@dimen/file_picker_file_select_button_width"
             android:layout_height="@dimen/file_picker_file_select_button_height"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/file_picker_select_button_unchecked"
-            android:background="@android:color/transparent"/>
+            android:layout_centerVertical="true"/>
 
     <TextView
             android:id="@+id/nameView"
