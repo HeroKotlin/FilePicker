@@ -76,8 +76,10 @@ class FileList : FrameLayout {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FileItem {
             val view = LayoutInflater.from(parent.context).inflate(R.layout.file_picker_file_item, parent, false)
-            return FileItem(view, configuration) {
+            return FileItem(view, configuration, {
                 onFileClick?.invoke(it)
+            }) {
+                adapter.notifyItemChanged(it)
             }
         }
 

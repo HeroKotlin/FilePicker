@@ -17,8 +17,6 @@
     <dimen name="file_picker_file_time_margin_top">5dp</dimen>
     <dimen name="file_picker_file_time_text_size">12dp</dimen>
 
-    <dimen name="file_picker_file_separator_width">1px</dimen>
-    <dimen name="file_picker_file_separator_margin_left">10dp</dimen>
-    <dimen name="file_picker_file_separator_margin_right">10dp</dimen>
+    <dimen name="file_picker_file_select_button_margin_left">20dp</dimen>
 
 </resources>

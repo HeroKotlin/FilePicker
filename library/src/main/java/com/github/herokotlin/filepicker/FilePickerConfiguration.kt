@@ -8,7 +8,7 @@ import java.util.*
 abstract class FilePickerConfiguration {
 
     /**
-     * 扫描磁盘时，设置包含的文件类型
+     * 扫描磁盘时，设置包含的文件类型（include 和 exclude 只能二选一）
      */
     var includeFileMediaTypes = listOf<Int>()
 
@@ -78,11 +78,11 @@ abstract class FilePickerConfiguration {
                 "HH:mm"
             }
             else {
-                "MM-dd"
+                "MM月dd日"
             }
         }
         else {
-            "yyyy-MM-dd"
+            "yyyy年MM月dd日"
         }
 
         val formater = SimpleDateFormat(pattern, Locale.US)

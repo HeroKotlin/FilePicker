@@ -17,23 +17,14 @@
             android:scaleType="centerCrop"
             tools:src="@drawable/file_picker_word"/>
 
-    <ImageView
+    <ImageButton
             android:id="@+id/selectButton"
             android:layout_width="@dimen/file_picker_file_icon_width"
             android:layout_height="@dimen/file_picker_file_icon_height"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            tools:src="@drawable/file_picker_excel"/>
-
-    <View
-            android:id="@+id/separatorView"
-            android:layout_width="@dimen/file_picker_file_separator_width"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="true"
-            android:layout_toLeftOf="@id/selectButton"
-            android:layout_marginRight="@dimen/file_picker_file_separator_margin_right"
-            android:background="@drawable/file_picker_file_separator"/>
+            android:src="@drawable/file_picker_select_button_unchecked"
+            android:background="@android:color/transparent"/>
 
     <TextView
             android:id="@+id/nameView"
@@ -41,10 +32,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@id/iconView"
-            android:layout_toLeftOf="@id/separatorView"
+            android:layout_toLeftOf="@id/selectButton"
             android:layout_marginLeft="@dimen/file_picker_file_name_margin_left"
             android:layout_marginTop="@dimen/file_picker_file_name_margin_top"
-            android:layout_marginRight="@dimen/file_picker_file_separator_margin_left"
+            android:layout_marginRight="@dimen/file_picker_file_select_button_margin_left"
             android:gravity="left"
             android:maxLines="1"
             android:ellipsize="end"
@@ -69,10 +60,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/nameView"
             android:layout_toRightOf="@id/sizeView"
-            android:layout_toLeftOf="@id/separatorView"
+            android:layout_toLeftOf="@id/selectButton"
             android:layout_marginTop="@dimen/file_picker_file_time_margin_top"
             android:layout_marginLeft="@dimen/file_picker_file_time_margin_left"
-            android:layout_marginRight="@dimen/file_picker_file_separator_margin_left"
+            android:layout_marginRight="@dimen/file_picker_file_select_button_margin_left"
             android:gravity="left"
             android:textSize="@dimen/file_picker_file_time_text_size"
             android:textColor="@color/file_picker_file_time_text_color"
