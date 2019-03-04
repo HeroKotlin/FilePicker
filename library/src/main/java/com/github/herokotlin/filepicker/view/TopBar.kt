@@ -8,7 +8,7 @@ import com.github.herokotlin.filepicker.FilePickerConfiguration
 import com.github.herokotlin.filepicker.R
 import kotlinx.android.synthetic.main.file_picker_top_bar.view.*
 
-class TopBar: RelativeLayout {
+internal class TopBar: RelativeLayout {
 
     lateinit var configuration: FilePickerConfiguration
 
@@ -27,7 +27,7 @@ class TopBar: RelativeLayout {
                 submitButton.isEnabled = true
                 submitButton.alpha = 1f
                 if (configuration.maxSelectCount > 1) {
-                    title = "$submitButtonTitle($selectedCount/${configuration.maxSelectCount})"
+                    title = "$submitButtonTitle($value/${configuration.maxSelectCount})"
                 }
             }
             else {

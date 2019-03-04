@@ -1,13 +1,13 @@
 package com.github.herokotlin.filepicker
 
 import android.app.Activity
-import com.github.herokotlin.filepicker.model.File
+import com.github.herokotlin.filepicker.model.PickedFile
 
 interface FilePickerCallback {
 
     fun onCancel(activity: Activity)
 
-    fun onSubmit(activity: Activity, assetList: List<File>)
+    fun onSubmit(activity: Activity, assetList: List<PickedFile>)
 
     // 拉取相册数据时，发现没权限
     fun onFetchWithoutPermissions(activity: Activity) {

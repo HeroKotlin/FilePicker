@@ -1,5 +1,6 @@
 package com.github.herokotlin.filepicker
 
+import android.app.Activity
 import android.provider.MediaStore
 import com.github.herokotlin.filepicker.model.File
 import java.text.SimpleDateFormat
@@ -46,6 +47,11 @@ abstract class FilePickerConfiguration {
      * 是否正序
      */
     var fileSortAscending = false
+
+    /**
+     * 请求权限
+     */
+    abstract fun requestPermissions(activity: Activity, permissions: List<String>, requestCode: Int): Boolean
 
     /**
      * 格式化文件尺寸

@@ -1,2 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.github.herokotlin.filepicker"/>
+          package="com.github.herokotlin.filepicker">
+
+    <application>
+        <activity
+                android:name=".FilePickerActivity"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+                android:screenOrientation="portrait">
+        </activity>
+    </application>
+
+</manifest>

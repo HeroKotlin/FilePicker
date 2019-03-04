@@ -75,8 +75,6 @@ class FileList : FrameLayout {
 
         if (selected) {
 
-            // 因为有动画，用户可能在动画过程中快速点击了新的照片
-            // 这里应该忽略
             if (selectedCount == configuration.maxSelectCount) {
                 return
             }
