@@ -19,8 +19,8 @@
 
     <ImageButton
             android:id="@+id/selectButton"
-            android:layout_width="@dimen/file_picker_file_icon_width"
-            android:layout_height="@dimen/file_picker_file_icon_height"
+            android:layout_width="@dimen/file_picker_file_select_button_width"
+            android:layout_height="@dimen/file_picker_file_select_button_height"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:src="@drawable/file_picker_select_button_unchecked"
