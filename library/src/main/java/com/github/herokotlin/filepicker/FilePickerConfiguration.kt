@@ -90,9 +90,7 @@ abstract class FilePickerConfiguration {
             "yyyy年MM月dd日"
         }
 
-        val formater = SimpleDateFormat(pattern, Locale.US)
-
-        return formater.format(calendar.time)
+        return SimpleDateFormat(pattern, Locale.US).format(calendar.time)
 
     }
 
