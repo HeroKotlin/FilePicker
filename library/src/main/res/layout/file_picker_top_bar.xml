@@ -2,8 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/file_picker_top_bar_height"
-                android:paddingLeft="@dimen/file_picker_top_bar_padding_horizontal"
-                android:paddingRight="@dimen/file_picker_top_bar_padding_horizontal"
                 android:background="@drawable/file_picker_top_bar">
 
     <Button
@@ -20,7 +18,23 @@
             android:minHeight="0dp"
             android:background="@android:color/transparent"
             style="?android:attr/borderlessButtonStyle"/>
-
-
-
+    
+    <Button
+            android:id="@+id/submitButton"
+            android:layout_width="@dimen/file_picker_submit_button_width"
+            android:layout_height="@dimen/file_picker_submit_button_height"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/file_picker_submit_button_margin_right"
+            android:textSize="@dimen/file_picker_submit_button_title_text_size"
+            android:textColor="@color/file_picker_submit_button_title_text_color"
+            android:text="@string/file_picker_submit_button_title"
+            android:enabled="false"
+            android:alpha="0.5"
+            android:padding="0dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:background="@drawable/file_picker_submit_button"
+            style="?android:attr/borderlessButtonStyle"/>
+    
 </RelativeLayout>
