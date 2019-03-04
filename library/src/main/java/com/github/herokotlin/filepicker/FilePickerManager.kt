@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.*
 import android.provider.MediaStore
-import android.util.Log
 import com.github.herokotlin.filepicker.model.File
 
 object FilePickerManager {
@@ -58,30 +57,33 @@ object FilePickerManager {
                 configuration.fileSortField + " " + if (configuration.fileSortAscending) "ASC" else "DESC"
             )
 
-            fileList.clear()
+            cursor?.let {
 
-            while (cursor.moveToNext()) {
+                fileList.clear()
 
+                while (it.moveToNext()) {
 
-                val file = File.build(
-                    cursor.getString(cursor.getColumnIndex(FilePickerConstant.FIELD_PATH)),
-                    cursor.getInt(cursor.getColumnIndex(FilePickerConstant.FIELD_SIZE)),
-                    cursor.getString(cursor.getColumnIndex(FilePickerConstant.FIELD_MIME_TYPE)),
-                    if (configuration.fileSortField == FilePickerConstant.FIELD_UPDATE_TIME) {
-                        cursor.getLong(cursor.getColumnIndex(FilePickerConstant.FIELD_UPDATE_TIME))
+                    val file = File.build(
+                        it.getString(it.getColumnIndex(FilePickerConstant.FIELD_PATH)),
+                        it.getInt(it.getColumnIndex(FilePickerConstant.FIELD_SIZE)),
+                        it.getString(it.getColumnIndex(FilePickerConstant.FIELD_MIME_TYPE)),
+                        if (configuration.fileSortField == FilePickerConstant.FIELD_UPDATE_TIME) {
+                            it.getLong(it.getColumnIndex(FilePickerConstant.FIELD_UPDATE_TIME))
+                        }
+                        else {
+                            it.getLong(it.getColumnIndex(FilePickerConstant.FIELD_CREATE_TIME))
+                        }
+                    )
+
+                    if (file != null && configuration.filter(file)) {
+                        fileList.add(file)
                     }
-                    else {
-                        cursor.getLong(cursor.getColumnIndex(FilePickerConstant.FIELD_CREATE_TIME))
-                    }
-                )
 
-                if (file != null && configuration.filter(file)) {
-                    fileList.add(file)
                 }
 
-            }
+                it.close()
 
-            cursor.close()
+            }
 
             // 回到主线程
             handler.sendEmptyMessage(0)
