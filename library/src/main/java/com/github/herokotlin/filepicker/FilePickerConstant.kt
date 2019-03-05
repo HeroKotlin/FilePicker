@@ -8,7 +8,6 @@ object FilePickerConstant {
 
     const val SIZE_MB = 1024 * SIZE_KB
 
-
     const val FIELD_PATH = MediaStore.Files.FileColumns.DATA
 
     const val FIELD_SIZE = MediaStore.Files.FileColumns.SIZE
@@ -42,5 +41,14 @@ object FilePickerConstant {
     const val MIME_TYPE_PPTX = "application/vnd.openxmlformats-officedocument.presentationml.presentation"
 
     const val MIME_TYPE_M4A = "audio/mp4a-latm"
+
+
+    const val MEDIA_TYPE_IMAGE = MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE
+
+    const val MEDIA_TYPE_VIDEO = MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO
+
+    const val MEDIA_TYPE_AUDIO = MediaStore.Files.FileColumns.MEDIA_TYPE_AUDIO
+
+    const val MEDIA_TYPE_PLAYLIST = MediaStore.Files.FileColumns.MEDIA_TYPE_PLAYLIST
 
 }

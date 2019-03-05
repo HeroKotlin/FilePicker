@@ -9,7 +9,7 @@ interface FilePickerCallback {
 
     fun onSubmit(activity: Activity, assetList: List<PickedFile>)
 
-    // 拉取相册数据时，发现没权限
+    // 拉取文件数据时，发现没权限
     fun onFetchWithoutPermissions(activity: Activity) {
 
     }

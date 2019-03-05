@@ -52,7 +52,12 @@ object FilePickerManager {
             val cursor = contentProvider.query(
                 MediaStore.Files.getContentUri("external"),
                 FilePickerConstant.FILE_FIELDS,
-                getSelection(configuration.minSize, configuration.maxSize, configuration.includeFileMediaTypes, configuration.excludeFileMediaTypes),
+                getSelection(
+                    configuration.fileMinSize,
+                    configuration.fileMaxSize,
+                    configuration.includeFileMediaTypes,
+                    configuration.excludeFileMediaTypes
+                ),
                 null,
                 configuration.fileSortField + " " + if (configuration.fileSortAscending) "ASC" else "DESC"
             )

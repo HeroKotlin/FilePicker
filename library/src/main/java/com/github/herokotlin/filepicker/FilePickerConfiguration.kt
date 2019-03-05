@@ -1,7 +1,6 @@
 package com.github.herokotlin.filepicker
 
 import android.app.Activity
-import android.provider.MediaStore
 import com.github.herokotlin.filepicker.model.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -22,21 +21,21 @@ abstract class FilePickerConfiguration {
      * 扫描磁盘时，设置剔除的文件类型
      */
     var excludeFileMediaTypes = listOf(
-        MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE,
-        MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO,
-        MediaStore.Files.FileColumns.MEDIA_TYPE_AUDIO,
-        MediaStore.Files.FileColumns.MEDIA_TYPE_PLAYLIST
+        FilePickerConstant.MEDIA_TYPE_IMAGE,
+        FilePickerConstant.MEDIA_TYPE_VIDEO,
+        FilePickerConstant.MEDIA_TYPE_AUDIO,
+        FilePickerConstant.MEDIA_TYPE_PLAYLIST
     )
 
     /**
-     * 文件最小尺寸
+     * 文件最小尺寸，设置为 0 表示不限制
      */
-    var minSize = FilePickerConstant.SIZE_KB
+    var fileMinSize = FilePickerConstant.SIZE_KB
 
     /**
-     * 文件最大尺寸
+     * 文件最大尺寸，设置为 0 表示不限制
      */
-    var maxSize = 20 * FilePickerConstant.SIZE_MB
+    var fileMaxSize = 20 * FilePickerConstant.SIZE_MB
 
     /**
      * 排序字段
