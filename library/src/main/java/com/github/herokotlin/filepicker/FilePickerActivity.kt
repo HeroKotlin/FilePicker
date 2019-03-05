@@ -8,9 +8,6 @@ import com.github.herokotlin.filepicker.model.PickedFile
 import com.github.herokotlin.filepicker.model.File as PickerFile
 import kotlinx.android.synthetic.main.file_picker_activity.*
 import kotlinx.android.synthetic.main.file_picker_top_bar.view.*
-import java.io.File
-
-import java.util.regex.Pattern
 
 class FilePickerActivity: AppCompatActivity() {
 
@@ -72,7 +69,6 @@ class FilePickerActivity: AppCompatActivity() {
 
     private fun submit() {
 
-        // 先排序
         val selectedList = mutableListOf<PickerFile>()
 
         fileListView.selectedFileList.forEach {
@@ -81,34 +77,12 @@ class FilePickerActivity: AppCompatActivity() {
 
         selectedList.sortBy { it.index }
 
-        // 文件名包含其他字符，需转存一份，避免调用者出现编码问题，导致无法上传
-        val pattern = Pattern.compile("[^A-Za-z0-9_]")
-        val targetPathPrefix = "${externalCacheDir.absolutePath}/${System.currentTimeMillis()}"
+        val cacheDir = externalCacheDir.absolutePath
 
-        val result = selectedList.map {
-
-            var path = it.path
-            var fileName = it.name
-
-            var extName = ""
-
-            val index = fileName.indexOf(".")
-            if (index > 0) {
-                extName = fileName.substring(index)
-                fileName = fileName.substring(0, index)
-            }
-
-            if (pattern.matcher(fileName).find()) {
-                val source = File(path)
-                path = "$targetPathPrefix${it.index}$extName"
-                source.copyTo(File(path), true)
-            }
-
-            // 保持源文件名
-            PickedFile(path, it.name, it.size)
-        }
-
-        callback.onSubmit(this, result)
+        callback.onSubmit(
+            this,
+            selectedList.map { PickedFile.build(it, cacheDir) }
+        )
 
     }
 
