@@ -10,21 +10,6 @@ import kotlinx.android.synthetic.main.file_picker_select_button.view.*
 
 internal class SelectButton: RelativeLayout {
 
-    var checkable = false
-
-        set(value) {
-
-            field = value
-
-            visibility = if (value) {
-                View.VISIBLE
-            }
-            else {
-                View.GONE
-            }
-
-        }
-
     var checked = false
 
         set(value) {

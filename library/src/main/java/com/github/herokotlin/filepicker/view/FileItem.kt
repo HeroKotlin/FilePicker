@@ -37,7 +37,6 @@ class FileItem(view: View, private val configuration: FilePickerConfiguration, p
         sizeView.text = configuration.formatSize(file.size)
         timeView.text = configuration.formatTime(file.time * 1000)
 
-        selectButton.checkable = file.selectable
         selectButton.checked = file.selected
 
         iconView.setImageResource(
@@ -64,6 +63,13 @@ class FileItem(view: View, private val configuration: FilePickerConfiguration, p
         )
 
         this.file = file
+
+        selectButton.visibility = if (file.selectable) {
+            View.VISIBLE
+        }
+        else {
+            View.GONE
+        }
 
     }
 

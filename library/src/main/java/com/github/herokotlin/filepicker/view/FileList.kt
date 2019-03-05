@@ -68,7 +68,34 @@ class FileList : FrameLayout {
 
     }
 
-    private fun toggleChecked(file: File) {
+    private fun toggleSingleChecked(file: File) {
+
+        // checked 获取反选值
+        val checked = !file.selected
+        val selectedCount = selectedFileList.count()
+
+        if (selectedCount == 1) {
+            val selectedFile = selectedFileList[0]
+            selectedFile.selected = false
+            selectedFileList.remove(selectedFile)
+            // 如果只是点击取消选择，要触发回调
+            // 否则跟下面那段一起触发回调
+            if (!checked) {
+                onSelectedFileListChange?.invoke()
+            }
+            adapter.notifyItemChanged(selectedFile.index)
+        }
+
+        if (checked) {
+            file.selected = true
+            selectedFileList.add(file)
+            onSelectedFileListChange?.invoke()
+            adapter.notifyItemChanged(file.index)
+        }
+
+    }
+
+    private fun toggleMultiChecked(file: File) {
 
         val selected = !file.selected
         val selectedCount = selectedFileList.count()
@@ -126,6 +153,10 @@ class FileList : FrameLayout {
             file.selectable = if (file.selected) {
                 true
             }
+            // 单选总是可选
+            else if (configuration.maxSelectCount == 1) {
+                true
+            }
             else {
                 selectedFileList.count() < configuration.maxSelectCount
             }
@@ -142,7 +173,12 @@ class FileList : FrameLayout {
                     onFileClick?.invoke(it)
                 },
                 {
-                    toggleChecked(it)
+                    if (configuration.maxSelectCount > 1) {
+                        toggleMultiChecked(it)
+                    }
+                    else {
+                        toggleSingleChecked(it)
+                    }
                 }
             )
         }
