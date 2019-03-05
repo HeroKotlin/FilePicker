@@ -54,6 +54,9 @@ class FileItem(view: View, private val configuration: FilePickerConfiguration, p
                 FileType.PDF -> {
                     R.drawable.file_picker_pdf
                 }
+                FileType.AUDIO -> {
+                    R.drawable.file_picker_audio
+                }
                 else -> {
                     R.drawable.file_picker_txt
                 }

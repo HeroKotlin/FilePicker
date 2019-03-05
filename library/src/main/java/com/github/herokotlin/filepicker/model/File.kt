@@ -5,10 +5,10 @@ import com.github.herokotlin.filepicker.enum.FileType
 
 data class File(
     val path: String,
-    var name: String,
-    var size: Int,
+    val name: String,
+    val size: Int,
     val type: FileType,
-    var time: Long,
+    val time: Long,
 
     var index: Int = 0,
     var selected: Boolean = false,
@@ -48,6 +48,9 @@ data class File(
                 }
                 FilePickerConstant.MIME_TYPE_CSV -> {
                     FileType.EXCEL
+                }
+                FilePickerConstant.MIME_TYPE_M4A -> {
+                    FileType.AUDIO
                 }
                 else -> {
                     FileType.UNKNOWN

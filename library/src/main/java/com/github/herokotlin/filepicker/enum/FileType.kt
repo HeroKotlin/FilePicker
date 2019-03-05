@@ -12,6 +12,8 @@ enum class FileType {
 
     TXT,
 
+    AUDIO,
+
     UNKNOWN
 
 }
