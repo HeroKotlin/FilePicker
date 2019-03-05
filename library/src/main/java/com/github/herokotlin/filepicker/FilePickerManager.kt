@@ -55,8 +55,7 @@ object FilePickerManager {
                 getSelection(
                     configuration.fileMinSize,
                     configuration.fileMaxSize,
-                    configuration.includeFileMediaTypes,
-                    configuration.excludeFileMediaTypes
+                    configuration.fileMimeTypes
                 ),
                 null,
                 configuration.fileSortField + " " + if (configuration.fileSortAscending) "ASC" else "DESC"
@@ -136,7 +135,7 @@ object FilePickerManager {
 
     }
 
-    private fun getSelection(minSize: Int, maxSize: Int, includeMediaTypes: List<Int>, excludeMediaTypes: List<Int>): String? {
+    private fun getSelection(minSize: Int, maxSize: Int, mimeTypes: List<String>): String? {
 
         val list = mutableListOf<String>()
 
@@ -157,13 +156,9 @@ object FilePickerManager {
             )
         }
 
-        if (includeMediaTypes.count() > 0) {
-            val item = includeMediaTypes.map {"${FilePickerConstant.FIELD_MEDIA_TYPE} == $it" }
+        if (mimeTypes.count() > 0) {
+            val item = mimeTypes.map {"${FilePickerConstant.FIELD_MIME_TYPE} = \"$it\"" }
             list.add(item.joinToString(" OR "))
-        }
-        else if (excludeMediaTypes.count() > 0) {
-            val item = excludeMediaTypes.map {"${FilePickerConstant.FIELD_MEDIA_TYPE} != $it" }
-            list.add(item.joinToString(" AND "))
         }
 
         if (list.count() > 0) {

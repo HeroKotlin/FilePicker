@@ -13,18 +13,17 @@ abstract class FilePickerConfiguration {
     var maxSelectCount = 9
 
     /**
-     * 扫描磁盘时，设置包含的文件类型（include 和 exclude 只能二选一）
+     * 扫描磁盘时，设置包含的文件类型
      */
-    var includeFileMediaTypes = listOf<Int>()
-
-    /**
-     * 扫描磁盘时，设置剔除的文件类型
-     */
-    var excludeFileMediaTypes = listOf(
-        FilePickerConstant.MEDIA_TYPE_IMAGE,
-        FilePickerConstant.MEDIA_TYPE_VIDEO,
-        FilePickerConstant.MEDIA_TYPE_AUDIO,
-        FilePickerConstant.MEDIA_TYPE_PLAYLIST
+    var fileMimeTypes = listOf(
+        FilePickerConstant.MIME_TYPE_CSV,
+        FilePickerConstant.MIME_TYPE_PDF,
+        FilePickerConstant.MIME_TYPE_DOC,
+        FilePickerConstant.MIME_TYPE_XLS,
+        FilePickerConstant.MIME_TYPE_PPT,
+        FilePickerConstant.MIME_TYPE_DOCX,
+        FilePickerConstant.MIME_TYPE_XLSX,
+        FilePickerConstant.MIME_TYPE_PPTX
     )
 
     /**
