@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.github.herokotlin.filepicker.FilePickerConfiguration
@@ -24,6 +25,11 @@ class FileList : FrameLayout {
 
             if (value == field) {
                 return
+            }
+
+            if (value.count() > 0 && spinnerView.visibility == View.VISIBLE) {
+                spinnerView.visibility = View.GONE
+                recyclerView.visibility = View.VISIBLE
             }
 
             field = value

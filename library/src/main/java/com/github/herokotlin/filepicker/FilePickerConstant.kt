@@ -40,7 +40,7 @@ object FilePickerConstant {
 
     const val MIME_TYPE_PPTX = "application/vnd.openxmlformats-officedocument.presentationml.presentation"
 
-    const val MIME_TYPE_M4A = "audio/mp4a-latm"
+    const val MIME_TYPE_M4A = "audio/mpeg"
 
 
     const val MEDIA_TYPE_IMAGE = MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE
