@@ -17,22 +17,22 @@ data class PickedFile(
         fun build(file: File, cacheDir: String): PickedFile {
 
             var path = file.path
-            var fileName = file.name
-
-            var extName = ""
-
-            val index = fileName.indexOf(".")
-            if (index > 0) {
-                extName = fileName.substring(index)
-                fileName = fileName.substring(0, index)
-            }
-
-            if (pattern.matcher(fileName).find()) {
-                val source = NativeFile(path)
-                fileName = URLEncoder.encode(fileName, "utf-8")
-                path = "$cacheDir/$fileName$extName"
-                source.copyTo(NativeFile(path), true)
-            }
+//            var fileName = file.name
+//
+//            var extName = ""
+//
+//            val index = fileName.indexOf(".")
+//            if (index > 0) {
+//                extName = fileName.substring(index)
+//                fileName = fileName.substring(0, index)
+//            }
+//
+//            if (pattern.matcher(fileName).find()) {
+//                val source = NativeFile(path)
+//                fileName = URLEncoder.encode(fileName, "utf-8")
+//                path = "$cacheDir/$fileName$extName"
+//                source.copyTo(NativeFile(path), true)
+//            }
 
             return PickedFile(path, file.name, file.size)
 
