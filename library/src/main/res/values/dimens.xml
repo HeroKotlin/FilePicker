@@ -7,20 +7,20 @@
     <dimen name="file_picker_file_icon_height">40dp</dimen>
 
     <dimen name="file_picker_file_name_margin_left">10dp</dimen>
-    <dimen name="file_picker_file_name_margin_top">4dp</dimen>
+    <dimen name="file_picker_file_name_margin_top">3dp</dimen>
     <dimen name="file_picker_file_name_text_size">14dp</dimen>
 
-    <dimen name="file_picker_file_size_margin_top">5dp</dimen>
+    <dimen name="file_picker_file_size_margin_top">2dp</dimen>
     <dimen name="file_picker_file_size_text_size">12dp</dimen>
 
     <dimen name="file_picker_file_time_margin_left">10dp</dimen>
-    <dimen name="file_picker_file_time_margin_top">5dp</dimen>
+    <dimen name="file_picker_file_time_margin_top">2dp</dimen>
     <dimen name="file_picker_file_time_text_size">12dp</dimen>
 
     <!-- 每行的 padding right 设置为 0，因此 select button 的宽度需要大一些 -->
     <dimen name="file_picker_file_select_button_width">54dp</dimen>
     <dimen name="file_picker_file_select_button_height">44dp</dimen>
-    <dimen name="file_picker_file_select_button_margin_left">20dp</dimen>
+    <dimen name="file_picker_file_select_button_margin_left">10dp</dimen>
 
 
     <dimen name="file_picker_top_bar_height">44dp</dimen>

@@ -8,7 +8,7 @@ import com.github.herokotlin.filepicker.model.File
 
 object FilePickerManager {
 
-    private const val PERMISSION_REQUEST_CODE = 12322
+    private const val PERMISSION_REQUEST_CODE = 12345651
 
     lateinit var onRequestPermissions: (List<String>, Int) -> Boolean
 
@@ -65,18 +65,20 @@ object FilePickerManager {
 
                 fileList.clear()
 
+                val FIELD_TIME = if (configuration.fileSortField == FilePickerConstant.FIELD_UPDATE_TIME) {
+                    FilePickerConstant.FIELD_UPDATE_TIME
+                }
+                else {
+                    FilePickerConstant.FIELD_CREATE_TIME
+                }
+
                 while (it.moveToNext()) {
 
                     val file = File.build(
                         it.getString(it.getColumnIndex(FilePickerConstant.FIELD_PATH)),
                         it.getInt(it.getColumnIndex(FilePickerConstant.FIELD_SIZE)),
                         it.getString(it.getColumnIndex(FilePickerConstant.FIELD_MIME_TYPE)),
-                        if (configuration.fileSortField == FilePickerConstant.FIELD_UPDATE_TIME) {
-                            it.getLong(it.getColumnIndex(FilePickerConstant.FIELD_UPDATE_TIME))
-                        }
-                        else {
-                            it.getLong(it.getColumnIndex(FilePickerConstant.FIELD_CREATE_TIME))
-                        }
+                        it.getLong(it.getColumnIndex(FIELD_TIME))
                     )
 
                     if (file != null && configuration.filter(file)) {

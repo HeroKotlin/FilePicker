@@ -1,7 +1,5 @@
 package com.github.herokotlin.filepicker.model
 
-import java.io.File as NativeFile
-
 data class PickedFile(
     val path: String,
     val name: String,
