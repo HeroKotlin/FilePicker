@@ -77,11 +77,9 @@ class FilePickerActivity: AppCompatActivity() {
 
         selectedList.sortBy { it.index }
 
-        val cacheDir = externalCacheDir.absolutePath
-
         callback.onSubmit(
             this,
-            selectedList.map { PickedFile.build(it, cacheDir) }
+            selectedList.map { PickedFile.build(it) }
         )
 
     }
