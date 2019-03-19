@@ -47,6 +47,31 @@ abstract class FilePickerConfiguration {
     var fileSortAscending = false
 
     /**
+     * 当天的时间格式
+     */
+    var dateFormatCurrentDate = "HH:mm"
+
+    /**
+     * 当年的时间格式
+     */
+    var dateFormatCurrentYear = "MM月dd日"
+
+    /**
+     * 比较早期的时间格式
+     */
+    var dateFormatAnyTime = "yyyy年MM月dd日"
+
+    /**
+     * 确定按钮的文字
+     */
+    var submitButtonTitle = "确定"
+
+    /**
+     * 取消按钮的文字
+     */
+    var cancelButtonTitle = "取消"
+
+    /**
      * 请求权限
      */
     abstract fun requestPermissions(activity: Activity, permissions: List<String>, requestCode: Int): Boolean
@@ -84,14 +109,14 @@ abstract class FilePickerConfiguration {
             if (month == calendar.get(Calendar.MONTH)
                 && date == calendar.get(Calendar.DATE)
             ) {
-                "HH:mm"
+                dateFormatCurrentDate
             }
             else {
-                "MM月dd日"
+                dateFormatCurrentYear
             }
         }
         else {
-            "yyyy年MM月dd日"
+            dateFormatAnyTime
         }
 
         return SimpleDateFormat(pattern, Locale.US).format(calendar.time)

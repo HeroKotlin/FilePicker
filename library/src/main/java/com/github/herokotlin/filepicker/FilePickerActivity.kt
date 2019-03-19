@@ -36,6 +36,12 @@ class FilePickerActivity: AppCompatActivity() {
         }
 
         topBar.configuration = configuration
+        if (configuration.submitButtonTitle.isNotEmpty()) {
+            topBar.submitButton.text = configuration.submitButtonTitle
+        }
+        if (configuration.cancelButtonTitle.isNotEmpty()) {
+            topBar.cancelButton.text = configuration.cancelButtonTitle
+        }
         topBar.cancelButton.setOnClickListener {
             callback.onCancel(this)
         }
