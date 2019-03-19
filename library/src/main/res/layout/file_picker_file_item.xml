@@ -67,6 +67,4 @@
             android:textColor="@color/file_picker_file_time_text_color"
             tools:text="2020-12-22 22:22:22"/>
 
-
-
 </RelativeLayout>
