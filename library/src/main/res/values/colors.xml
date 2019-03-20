@@ -12,8 +12,8 @@
 
     <color name="file_picker_submit_button_bg_color_normal">#FF9C00</color>
     <color name="file_picker_submit_button_bg_color_pressed">#FF7A07</color>
-    <color name="file_picker_submit_button_title_text_color">#FFF</color>
+    <color name="file_picker_submit_button_text_color">#FFF</color>
 
-    <color name="file_picker_cancel_button_title_text_color">#666</color>
+    <color name="file_picker_cancel_button_text_color">#666</color>
     
 </resources>
