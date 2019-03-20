@@ -1,26 +1,11 @@
 package com.github.herokotlin.filepicker
 
 import android.content.Context
-import android.content.pm.PackageManager
 import android.os.*
 import android.provider.MediaStore
 import com.github.herokotlin.filepicker.model.File
 
 object FilePickerManager {
-
-    private const val PERMISSION_REQUEST_CODE = 12345651
-
-    lateinit var onRequestPermissions: (List<String>, Int) -> Boolean
-
-    var onPermissionsGranted: (() -> Unit)? = null
-
-    var onPermissionsDenied: (() -> Unit)? = null
-
-    var onFetchWithoutPermissions: (() -> Unit)? = null
-
-    var onFetchWithoutExternalStorage: (() -> Unit)? = null
-
-    private lateinit var onRequestPermissionsComplete: () -> Unit
 
     private lateinit var onScanComplete: (List<File>) -> Unit
 
@@ -95,45 +80,6 @@ object FilePickerManager {
             handler.sendEmptyMessage(0)
 
         }).start()
-
-    }
-
-    fun requestPermissions(callback: () -> Unit) {
-
-        if (Environment.getExternalStorageState() != Environment.MEDIA_MOUNTED) {
-            onFetchWithoutExternalStorage?.invoke()
-            return
-        }
-
-        onRequestPermissionsComplete = callback
-
-        if (onRequestPermissions(
-                listOf(
-                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE
-                ),
-                PERMISSION_REQUEST_CODE
-            )
-        ) {
-            callback()
-        }
-
-    }
-
-    fun requestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-
-        if (requestCode != PERMISSION_REQUEST_CODE) {
-            return
-        }
-
-        for (i in 0 until permissions.size) {
-            if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
-                onPermissionsDenied?.invoke()
-                return
-            }
-        }
-
-        onPermissionsGranted?.invoke()
-        onRequestPermissionsComplete()
 
     }
 

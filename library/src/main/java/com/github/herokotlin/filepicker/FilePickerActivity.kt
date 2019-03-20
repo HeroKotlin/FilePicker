@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.github.herokotlin.filepicker.model.PickedFile
+import com.github.herokotlin.permission.Permission
 import com.github.herokotlin.filepicker.model.File as PickerFile
 import kotlinx.android.synthetic.main.file_picker_activity.*
 import kotlinx.android.synthetic.main.file_picker_top_bar.view.*
@@ -23,6 +24,8 @@ class FilePickerActivity: AppCompatActivity() {
         }
 
     }
+
+    private val permission = Permission(89190902, listOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE))
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -49,25 +52,24 @@ class FilePickerActivity: AppCompatActivity() {
             submit()
         }
 
-        FilePickerManager.onPermissionsGranted = {
+        permission.onPermissionsGranted = {
             callback.onPermissionsGranted(this)
         }
-        FilePickerManager.onPermissionsDenied = {
+        permission.onPermissionsDenied = {
             callback.onPermissionsDenied(this)
         }
-        FilePickerManager.onFetchWithoutPermissions = {
-            callback.onFetchWithoutPermissions(this)
+        permission.onExternalStorageNotWritable = {
+            callback.onExternalStorageNotWritable(this)
         }
-        FilePickerManager.onFetchWithoutExternalStorage = {
-            callback.onFetchWithoutExternalStorage(this)
-        }
-        FilePickerManager.onRequestPermissions = { permissions, requestCode ->
-            configuration.requestPermissions(this, permissions, requestCode)
+        permission.onPermissionsNotGranted = {
+            callback.onPermissionsNotGranted(this)
         }
 
-        FilePickerManager.requestPermissions {
-            FilePickerManager.scan(this, configuration) {
-                fileListView.fileList = it
+        if (permission.checkExternalStorageWritable()) {
+            permission.requestPermissions(this) {
+                FilePickerManager.scan(this, configuration) {
+                    fileListView.fileList = it
+                }
             }
         }
 
@@ -92,7 +94,7 @@ class FilePickerActivity: AppCompatActivity() {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        FilePickerManager.requestPermissionsResult(requestCode, permissions, grantResults)
+        permission.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
 }
