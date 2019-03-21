@@ -1,6 +1,5 @@
 package com.github.herokotlin.filepicker
 
-import android.app.Activity
 import com.github.herokotlin.filepicker.model.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -70,11 +69,6 @@ abstract class FilePickerConfiguration {
      * 取消按钮的文字
      */
     var cancelButtonTitle = "取消"
-
-    /**
-     * 请求权限
-     */
-    abstract fun requestPermissions(activity: Activity, permissions: List<String>, requestCode: Int): Boolean
 
     /**
      * 格式化文件尺寸
