@@ -52,6 +52,9 @@ class FilePickerActivity: AppCompatActivity() {
             submit()
         }
 
+        permission.onPermissionsNotGranted = {
+            callback.onPermissionsNotGranted(this)
+        }
         permission.onPermissionsGranted = {
             callback.onPermissionsGranted(this)
         }
@@ -60,9 +63,6 @@ class FilePickerActivity: AppCompatActivity() {
         }
         permission.onExternalStorageNotWritable = {
             callback.onExternalStorageNotWritable(this)
-        }
-        permission.onPermissionsNotGranted = {
-            callback.onPermissionsNotGranted(this)
         }
 
         if (permission.checkExternalStorageWritable()) {
