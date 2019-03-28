@@ -25,7 +25,7 @@ class FilePickerActivity: AppCompatActivity() {
 
     }
 
-    private val permission = Permission(89190902, listOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE))
+    private val permission = Permission(190902, listOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE))
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
