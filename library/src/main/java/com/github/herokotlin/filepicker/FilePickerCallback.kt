@@ -9,20 +9,4 @@ interface FilePickerCallback {
 
     fun onSubmit(activity: Activity, assetList: List<PickedFile>)
 
-    fun onPermissionsGranted(activity: Activity) {
-
-    }
-
-    fun onPermissionsDenied(activity: Activity) {
-
-    }
-
-    fun onPermissionsNotGranted(activity: Activity) {
-
-    }
-
-    fun onExternalStorageNotWritable(activity: Activity) {
-
-    }
-
 }
