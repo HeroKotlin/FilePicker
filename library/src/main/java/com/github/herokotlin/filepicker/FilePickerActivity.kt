@@ -18,14 +18,14 @@ class FilePickerActivity: AppCompatActivity() {
 
         lateinit var configuration: FilePickerConfiguration
 
+        val permission = Permission(19903, listOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE))
+
         fun newInstance(context: Activity) {
             val intent = Intent(context, FilePickerActivity::class.java)
             context.startActivity(intent)
         }
 
     }
-
-    private val permission = Permission(19903, listOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE))
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -52,25 +52,9 @@ class FilePickerActivity: AppCompatActivity() {
             submit()
         }
 
-        permission.onPermissionsNotGranted = {
-            callback.onPermissionsNotGranted(this)
-        }
-        permission.onPermissionsGranted = {
-            callback.onPermissionsGranted(this)
-        }
-        permission.onPermissionsDenied = {
-            callback.onPermissionsDenied(this)
-        }
-        permission.onExternalStorageNotWritable = {
-            callback.onExternalStorageNotWritable(this)
-        }
-
-        if (permission.checkExternalStorageWritable()) {
-            permission.requestPermissions(this) {
-                FilePickerManager.scan(this, configuration) {
-                    fileListView.fileList = it
-                }
-            }
+        // 请求到权限之后再进来
+        FilePickerManager.scan(this, configuration) {
+            fileListView.fileList = it
         }
 
     }
@@ -90,11 +74,6 @@ class FilePickerActivity: AppCompatActivity() {
             selectedList.map { PickedFile.build(it) }
         )
 
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        permission.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
 }
