@@ -1,8 +1,8 @@
 package com.github.herokotlin.filepicker.view
 
 import android.content.Context
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -23,13 +23,16 @@ class FileList : FrameLayout {
 
         set(value) {
 
-            if (value == field) {
-                return
-            }
-
-            if (value.count() > 0 && spinnerView.visibility == View.VISIBLE) {
+            // 这里不应判断 value.count() > 0
+            // 如果手机里确实没有对应的文件，返回空数组是很正常的事
+            if (spinnerView.visibility == View.VISIBLE) {
                 spinnerView.visibility = View.GONE
-                recyclerView.visibility = View.VISIBLE
+                if (value.count() > 0) {
+                    recyclerView.visibility = View.VISIBLE
+                }
+                else {
+                    emptyView.visibility = View.VISIBLE
+                }
             }
 
             field = value

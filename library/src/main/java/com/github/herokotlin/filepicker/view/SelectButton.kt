@@ -3,7 +3,6 @@ package com.github.herokotlin.filepicker.view
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.RelativeLayout
 import com.github.herokotlin.filepicker.R
 import kotlinx.android.synthetic.main.file_picker_select_button.view.*

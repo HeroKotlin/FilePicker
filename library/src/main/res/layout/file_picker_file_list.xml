@@ -4,10 +4,18 @@
              android:layout_height="match_parent"
              android:background="@color/file_picker_file_list_bg_color">
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="gone"/>
+
+    <ImageView
+            android:id="@+id/emptyView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/file_picker_empty"
             android:visibility="gone"/>
 
     <ProgressBar

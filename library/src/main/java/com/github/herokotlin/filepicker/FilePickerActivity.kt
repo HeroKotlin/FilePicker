@@ -3,7 +3,7 @@ package com.github.herokotlin.filepicker
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.github.herokotlin.filepicker.model.PickedFile
 import com.github.herokotlin.permission.Permission
 import com.github.herokotlin.filepicker.model.File as PickerFile

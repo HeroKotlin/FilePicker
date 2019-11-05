@@ -1,6 +1,6 @@
 package com.github.herokotlin.filepicker.view
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import com.github.herokotlin.filepicker.FilePickerConfiguration
 import com.github.herokotlin.filepicker.enum.FileType
