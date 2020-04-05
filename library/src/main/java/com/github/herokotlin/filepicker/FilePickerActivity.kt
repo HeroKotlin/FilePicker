@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.github.herokotlin.filepicker.model.PickedFile
-import com.github.herokotlin.permission.Permission
 import com.github.herokotlin.filepicker.model.File as PickerFile
 import kotlinx.android.synthetic.main.file_picker_activity.*
 import kotlinx.android.synthetic.main.file_picker_top_bar.view.*
@@ -17,8 +16,6 @@ class FilePickerActivity: AppCompatActivity() {
         lateinit var callback: FilePickerCallback
 
         lateinit var configuration: FilePickerConfiguration
-
-        val permission = Permission(19903, listOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE))
 
         fun newInstance(context: Activity) {
             val intent = Intent(context, FilePickerActivity::class.java)
