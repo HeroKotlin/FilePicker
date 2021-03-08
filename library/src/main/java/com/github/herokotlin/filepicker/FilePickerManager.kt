@@ -122,7 +122,7 @@ object FilePickerManager {
         val count = where.count()
         if (count > 0) {
             whereStr = if (count > 1) {
-                where.map { "($it)" }.joinToString(" AND ")
+                where.joinToString(" AND ") { "($it)" }
             } else {
                 where[0]
             }
