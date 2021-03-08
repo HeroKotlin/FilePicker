@@ -34,15 +34,17 @@ object FilePickerManager {
 
             val contentProvider = context.contentResolver
 
+            val query = getQuery(
+                configuration.fileMinSize,
+                configuration.fileMaxSize,
+                configuration.fileMimeTypes
+            )
+
             val cursor = contentProvider.query(
                 MediaStore.Files.getContentUri("external"),
                 FilePickerConstant.FILE_FIELDS,
-                getSelection(
-                    configuration.fileMinSize,
-                    configuration.fileMaxSize,
-                    configuration.fileMimeTypes
-                ),
-                null,
+                query.where,
+                query.args.toTypedArray(),
                 configuration.fileSortField + " " + if (configuration.fileSortAscending) "ASC" else "DESC"
             )
 
@@ -83,38 +85,53 @@ object FilePickerManager {
 
     }
 
-    private fun getSelection(minSize: Int, maxSize: Int, mimeTypes: List<String>): String? {
+    private fun getQuery(minSize: Int, maxSize: Int, mimeTypes: List<String>): Query {
 
-        val list = mutableListOf<String>()
+        val args = mutableListOf<String>()
+        val where = mutableListOf<String>()
 
         val sizeList = mutableListOf<String>()
         if (minSize > 0) {
+            args.add(minSize.toString())
             sizeList.add(
-                "${FilePickerConstant.FIELD_SIZE} >= $minSize"
+                "${FilePickerConstant.FIELD_SIZE} >= ?"
             )
         }
         if (maxSize > 0) {
+            args.add(maxSize.toString())
             sizeList.add(
-                "${FilePickerConstant.FIELD_SIZE} <= $maxSize"
+                "${FilePickerConstant.FIELD_SIZE} <= ?"
             )
         }
         if (sizeList.count() > 0) {
-            list.add(
+            where.add(
                 sizeList.joinToString(" AND ")
             )
         }
 
         if (mimeTypes.count() > 0) {
-            val item = mimeTypes.map {"${FilePickerConstant.FIELD_MIME_TYPE} = \"$it\"" }
-            list.add(item.joinToString(" OR "))
+            val item = mimeTypes.map {
+                args.add(it)
+                "${FilePickerConstant.FIELD_MIME_TYPE} = ?"
+            }
+            where.add(item.joinToString(" OR "))
         }
 
-        if (list.count() > 0) {
-            return list.joinToString(" AND ")
+        var whereStr = ""
+
+        val count = where.count()
+        if (count > 0) {
+            whereStr = if (count > 1) {
+                where.map { "($it)" }.joinToString(" AND ")
+            } else {
+                where[0]
+            }
         }
 
-        return null
+        return Query(whereStr, args)
 
     }
+
+    private class Query(val where: String, val args: List<String>)
 
 }
