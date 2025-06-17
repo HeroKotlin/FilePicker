@@ -2,12 +2,13 @@ package com.github.herokotlin.filepicker
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
+import com.github.herokotlin.filepicker.databinding.FilePickerActivityBinding
 import com.github.herokotlin.filepicker.model.PickedFile
 import com.github.herokotlin.filepicker.model.File as PickerFile
-import kotlinx.android.synthetic.main.file_picker_activity.*
-import kotlinx.android.synthetic.main.file_picker_top_bar.view.*
 
 class FilePickerActivity: AppCompatActivity() {
 
@@ -24,34 +25,42 @@ class FilePickerActivity: AppCompatActivity() {
 
     }
 
+    private lateinit var binding: FilePickerActivityBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
+        // >= 安卓15 关闭 edge-to-edge
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            WindowCompat.setDecorFitsSystemWindows(window, true)
+        }
+
+        binding = FilePickerActivityBinding.inflate(layoutInflater)
 
         setContentView(R.layout.file_picker_activity)
 
-        fileListView.init(configuration)
-        fileListView.onSelectedFileListChange = {
-            topBar.selectedCount = fileListView.selectedFileList.count()
+        binding.fileListView.init(configuration)
+        binding.fileListView.onSelectedFileListChange = {
+            binding.topBar.selectedCount = binding.fileListView.selectedFileList.count()
         }
 
-        topBar.configuration = configuration
+        binding.topBar.configuration = configuration
         if (configuration.submitButtonTitle.isNotEmpty()) {
-            topBar.submitButton.text = configuration.submitButtonTitle
+            binding.topBar.binding.submitButton.text = configuration.submitButtonTitle
         }
         if (configuration.cancelButtonTitle.isNotEmpty()) {
-            topBar.cancelButton.text = configuration.cancelButtonTitle
+            binding.topBar.binding.cancelButton.text = configuration.cancelButtonTitle
         }
-        topBar.cancelButton.setOnClickListener {
+        binding.topBar.binding.cancelButton.setOnClickListener {
             callback.onCancel(this)
         }
-        topBar.submitButton.setOnClickListener {
+        binding.topBar.binding.submitButton.setOnClickListener {
             submit()
         }
 
         // 请求到权限之后再进来
         FilePickerManager.scan(this, configuration) {
-            fileListView.fileList = it
+            binding.fileListView.fileList = it
         }
 
     }
@@ -60,7 +69,7 @@ class FilePickerActivity: AppCompatActivity() {
 
         val selectedList = mutableListOf<PickerFile>()
 
-        fileListView.selectedFileList.forEach {
+        binding.fileListView.selectedFileList.forEach {
             selectedList.add(it)
         }
 

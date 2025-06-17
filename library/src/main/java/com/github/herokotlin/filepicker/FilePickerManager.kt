@@ -12,7 +12,7 @@ object FilePickerManager {
     private var fileList = mutableListOf<File>()
 
     private val handler = object: Handler(Looper.getMainLooper()) {
-        override fun handleMessage(msg: Message?) {
+        override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
             onScanComplete.invoke(fileList)
         }
@@ -61,13 +61,30 @@ object FilePickerManager {
 
                 while (it.moveToNext()) {
 
-                    val file = File.build(
-                        it.getString(it.getColumnIndex(FilePickerConstant.FIELD_PATH)),
-                        it.getInt(it.getColumnIndex(FilePickerConstant.FIELD_SIZE)),
-                        it.getString(it.getColumnIndex(FilePickerConstant.FIELD_MIME_TYPE)),
-                        it.getLong(it.getColumnIndex(FIELD_TIME))
-                    )
+                    var path = ""
+                    var size = 0
+                    var mimeType = ""
+                    var time: Long = 0
 
+                    val pathIndex = it.getColumnIndex(FilePickerConstant.FIELD_PATH)
+                    val sizeIndex = it.getColumnIndex(FilePickerConstant.FIELD_SIZE)
+                    val mimeTypeIndex = it.getColumnIndex(FilePickerConstant.FIELD_MIME_TYPE)
+                    val timeIndex = it.getColumnIndex(FIELD_TIME)
+
+                    if (pathIndex >= 0 ) {
+                        path = it.getString(pathIndex)
+                    }
+                    if (sizeIndex >= 0 ) {
+                        size = it.getInt(sizeIndex)
+                    }
+                    if (mimeTypeIndex >= 0 ) {
+                        mimeType = it.getString(mimeTypeIndex)
+                    }
+                    if (timeIndex >= 0 ) {
+                        time = it.getLong(timeIndex)
+                    }
+
+                    val file = File.build(path, size, mimeType, time)
                     if (file != null && configuration.filter(file)) {
                         fileList.add(file)
                     }

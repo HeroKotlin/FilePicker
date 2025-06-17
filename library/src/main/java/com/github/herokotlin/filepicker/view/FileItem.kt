@@ -6,24 +6,24 @@ import com.github.herokotlin.filepicker.FilePickerConfiguration
 import com.github.herokotlin.filepicker.enum.FileType
 import com.github.herokotlin.filepicker.model.File
 import com.github.herokotlin.filepicker.R
-import kotlinx.android.synthetic.main.file_picker_file_item.view.*
+import com.github.herokotlin.filepicker.databinding.FilePickerFileItemBinding
 
-class FileItem(view: View, private val configuration: FilePickerConfiguration, private val onClick: ((File) -> Unit), private val onToggle: ((File) -> Unit)): RecyclerView.ViewHolder(view) {
+class FileItem(binding: FilePickerFileItemBinding, private val configuration: FilePickerConfiguration, private val onClick: ((File) -> Unit), private val onToggle: ((File) -> Unit)): RecyclerView.ViewHolder(binding.root) {
 
-    private val iconView = view.iconView
+    private val iconView = binding.iconView
 
-    private val nameView = view.nameView
+    private val nameView = binding.nameView
 
-    private val sizeView = view.sizeView
+    private val sizeView = binding.sizeView
 
-    private val timeView = view.timeView
+    private val timeView = binding.timeView
 
-    private val selectButton = view.selectButton
+    private val selectButton = binding.selectButton
 
     private lateinit var file: File
 
     init {
-        view.setOnClickListener {
+        binding.root.setOnClickListener {
             onClick.invoke(file)
         }
         selectButton.setOnClickListener {

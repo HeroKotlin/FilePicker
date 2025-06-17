@@ -10,10 +10,13 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.github.herokotlin.filepicker.FilePickerConfiguration
 import com.github.herokotlin.filepicker.model.File
-import com.github.herokotlin.filepicker.R
-import kotlinx.android.synthetic.main.file_picker_file_list.view.*
+import com.github.herokotlin.filepicker.databinding.FilePickerFileItemBinding
+import com.github.herokotlin.filepicker.databinding.FilePickerFileListBinding
+import androidx.core.view.isVisible
 
 class FileList : FrameLayout {
+
+    lateinit var binding: FilePickerFileListBinding
 
     var onFileClick: ((File) -> Unit)? = null
 
@@ -25,13 +28,13 @@ class FileList : FrameLayout {
 
             // 这里不应判断 value.count() > 0
             // 如果手机里确实没有对应的文件，返回空数组是很正常的事
-            if (spinnerView.visibility == View.VISIBLE) {
-                spinnerView.visibility = View.GONE
-                if (value.count() > 0) {
-                    recyclerView.visibility = View.VISIBLE
+            if (binding.spinnerView.isVisible) {
+                binding.spinnerView.visibility = View.GONE
+                if (value.isNotEmpty()) {
+                    binding.recyclerView.visibility = View.VISIBLE
                 }
                 else {
-                    emptyView.visibility = View.VISIBLE
+                    binding.emptyView.visibility = View.VISIBLE
                 }
             }
 
@@ -61,9 +64,9 @@ class FileList : FrameLayout {
 
     private fun init() {
 
-        LayoutInflater.from(context).inflate(R.layout.file_picker_file_list, this)
+        binding = FilePickerFileListBinding.inflate(LayoutInflater.from(context), this, true)
 
-        recyclerView.layoutManager = LinearLayoutManager(this.context)
+        binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
 
     }
 
@@ -73,7 +76,7 @@ class FileList : FrameLayout {
 
         adapter = FileListAdapter()
 
-        recyclerView.adapter = adapter
+        binding.recyclerView.adapter = adapter
 
     }
 
@@ -174,9 +177,9 @@ class FileList : FrameLayout {
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FileItem {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.file_picker_file_item, parent, false)
+            val binding = FilePickerFileItemBinding.inflate(LayoutInflater.from(context), parent, false)
             return FileItem(
-                view,
+                binding,
                 configuration,
                 {
                     onFileClick?.invoke(it)

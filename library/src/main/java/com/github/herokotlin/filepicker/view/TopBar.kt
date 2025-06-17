@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import com.github.herokotlin.filepicker.FilePickerConfiguration
 import com.github.herokotlin.filepicker.R
-import kotlinx.android.synthetic.main.file_picker_top_bar.view.*
+import com.github.herokotlin.filepicker.databinding.FilePickerTopBarBinding
 
 internal class TopBar: RelativeLayout {
+
+    lateinit var binding: FilePickerTopBarBinding
 
     lateinit var configuration: FilePickerConfiguration
 
@@ -24,18 +26,18 @@ internal class TopBar: RelativeLayout {
 
             var title = submitButtonTitle
             if (value > 0) {
-                submitButton.isEnabled = true
-                submitButton.alpha = 1f
+                binding.submitButton.isEnabled = true
+                binding.submitButton.alpha = 1f
                 if (configuration.maxSelectCount > 1) {
                     title = "$submitButtonTitle($value/${configuration.maxSelectCount})"
                 }
             }
             else {
-                submitButton.isEnabled = false
-                submitButton.alpha = 0.5f
+                binding.submitButton.isEnabled = false
+                binding.submitButton.alpha = 0.5f
             }
 
-            submitButton.text = title
+            binding.submitButton.text = title
         }
 
     private val submitButtonTitle: String by lazy {
@@ -60,7 +62,7 @@ internal class TopBar: RelativeLayout {
     }
 
     private fun init() {
-        LayoutInflater.from(context).inflate(R.layout.file_picker_top_bar, this)
+        binding = FilePickerTopBarBinding.inflate(LayoutInflater.from(context), this, true)
     }
 
 }

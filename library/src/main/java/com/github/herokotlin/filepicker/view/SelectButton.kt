@@ -5,9 +5,11 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import com.github.herokotlin.filepicker.R
-import kotlinx.android.synthetic.main.file_picker_select_button.view.*
+import com.github.herokotlin.filepicker.databinding.FilePickerSelectButtonBinding
 
 internal class SelectButton: RelativeLayout {
+
+    lateinit var binding: FilePickerSelectButtonBinding
 
     var checked = false
 
@@ -18,8 +20,8 @@ internal class SelectButton: RelativeLayout {
             }
 
             field = value
-            
-            imageView.setImageResource(
+
+            binding.imageView.setImageResource(
                 if (value) {
                     R.drawable.file_picker_select_button_checked
                 }
@@ -43,7 +45,7 @@ internal class SelectButton: RelativeLayout {
     }
 
     private fun init() {
-        LayoutInflater.from(context).inflate(R.layout.file_picker_select_button, this)
+        binding = FilePickerSelectButtonBinding.inflate(LayoutInflater.from(context), this, true)
     }
 
 }
