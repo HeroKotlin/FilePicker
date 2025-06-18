@@ -37,7 +37,7 @@ class FilePickerActivity: AppCompatActivity() {
 
         binding = FilePickerActivityBinding.inflate(layoutInflater)
 
-        setContentView(R.layout.file_picker_activity)
+        setContentView(binding.root)
 
         binding.fileListView.init(configuration)
         binding.fileListView.onSelectedFileListChange = {
